@@ -1,87 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eee3cf">
-<title>KEMP EYE 👁 AI — PALM RECHARGE — 138.1 HZ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>KEMP EYE — 138.1 Hz Somatic Rhythm</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#f4efe6;font-family:Georgia,"Times New Roman",serif;color:#3e372f}
-body{display:flex;justify-content:center;align-items:center;padding:14px}
-.card{width:min(92vw,60mm);aspect-ratio:1/2;min-height:120mm;max-height:92vh;background:#f5ecd9;border:1px solid #cbbda4;border-radius:14px;box-shadow:0 12px 35px #0002;display:flex;flex-direction:column;padding:5.5mm 4.5mm 3.5mm;overflow:auto}
-.brand{text-align:center;font:700 11px/1.2 Arial,sans-serif;letter-spacing:.5px}
-h1{text-align:center;font:700 23px/1.05 Georgia,serif;margin:7px 0 3px}
-.freq{text-align:center;font:700 12px/1.2 Arial,sans-serif;letter-spacing:1px;margin-bottom:9px}
-.copy{font-size:11.3px;line-height:1.36;text-align:left}
-.copy p{margin:0 0 8px}
-.controls{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:5px 0}
-button{border:1px solid #88775e;background:#e8dcc5;color:#3e372f;border-radius:999px;padding:7px 10px;font:700 10px Arial,sans-serif;cursor:pointer;touch-action:manipulation}
-button:active{transform:scale(.97)}
-.charge{margin-top:auto;text-align:center;font:700 9px Arial,sans-serif;letter-spacing:.5px;padding:7px 0 4px;border-top:1px solid #cbbda4}
-.notes{font:8px/1.28 Arial,sans-serif;text-align:center}
-.notes div{margin-top:3px}
-a{color:inherit}
-.status{font:8px Arial,sans-serif;text-align:center;min-height:11px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100%;background:#eeeeeb;font-family:Arial,Helvetica,sans-serif}
+body{display:flex;justify-content:center;align-items:flex-start;padding:12px}
+.card{position:relative;width:min(100%,10cm);aspect-ratio:10/6;max-height:90vh;background:#f8f6ef;border:1px solid #c9c4b6;border-radius:10px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.15)}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.content{position:absolute;inset:0;z-index:5;pointer-events:none;color:#20252a}
+.title{position:absolute;top:5%;left:4%;right:4%;text-align:center}
+.brand{font-size:clamp(11px,2.5vw,17px);font-weight:700;letter-spacing:.04em}
+.main-title{margin-top:2px;font-size:clamp(12px,3vw,19px);font-weight:700;letter-spacing:.03em}
+.frequency{margin-top:2px;font-size:clamp(9px,2.2vw,14px);font-weight:600;letter-spacing:.08em}
+.guidance{position:absolute;left:5%;right:5%;top:23%;text-align:center;font-size:clamp(7px,1.7vw,11px);line-height:1.35;font-weight:400}
+.audioBox{position:absolute;left:4%;bottom:21%;width:42%;min-width:125px;background:rgba(255,255,255,.88);border:1px solid #c7c0ae;border-radius:8px;padding:5px 7px;pointer-events:auto}
+.audioTitle{font-size:clamp(8px,2vw,12px);font-weight:700}
+.audioSub{font-size:clamp(6px,1.5vw,9px);margin-top:1px}
+.audioButton{margin-top:4px;width:100%;min-height:25px;border:1px solid #8d887c;border-radius:20px;background:#fff;color:#20252a;font-weight:700;font-size:clamp(7px,1.7vw,10px);cursor:pointer;touch-action:manipulation}
+.audioButton.playing{background:#20252a;color:#fff}
+.footnotes{position:absolute;left:3%;right:3%;bottom:3%;padding-top:3px;border-top:1px solid #bdb7a8;display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;font-size:clamp(5px,1.25vw,8px);line-height:1.25;color:#44423d}
+.footnote-full{grid-column:1/-1}
+.disclaimer{color:#55514a}
+.ripple{position:absolute;width:8px;height:8px;border:1px solid rgba(70,110,125,.55);border-radius:50%;pointer-events:none;z-index:10;animation:ripple .9s ease-out forwards}
+@keyframes ripple{from{transform:translate(-50%,-50%) scale(1);opacity:.7}to{transform:translate(-50%,-50%) scale(15);opacity:0}}
 </style>
 </head>
 <body>
-<main class="card" id="liveCard">
-  <div class="brand">KEMP EYE 👁 AI</div>
-  <h1>PALM RECHARGE</h1>
-  <div class="freq">138.1 HZ HARMONIC RESONANCE</div>
-
-  <section class="copy">
-    <p>Allow your energy to gather right here, untouched by the noise of the day. Place a warm palm flat against the center of your chest, letting your hand rest as a quiet bridge over the source of your own vitality. Beneath your palm, notice the steady, untiring drum of your heart—beating completely on its own, holding you together without a single command.</p>
-    <p>Let the air draw itself inward, filling the chamber beneath your hand with a quiet, refreshing current. There is nothing to force, nothing to repair, and no distant screens to chase.</p>
-    <p>As you exhale, let a long, slow release drop down through your shoulders, your arms, and deep into the earth, draining every drop of fatigue. In this exact touch, the breath and the heartbeat meet, recharging your entire being from the inside out with effortless, enduring peace.</p>
-  </section>
-
-  <div class="controls">
-    <button id="play" type="button">▶ Play 138.1 Hz</button>
-    <button id="share" type="button">↗ Share</button>
-    <button id="wa" type="button">WhatsApp</button>
-  </div>
-  <div class="status" id="status"></div>
-
-  <div class="charge">KEMP EYE 👁 AI CHARGING POINT</div>
-  <footer class="notes">
-    <div>🎧 Headphone listening recommended.</div>
-    <div>AI-generated 138.1 Hz frequency audio.</div>
-    <div>Disclaimer: This is an experiential/wellness card and is not medical advice or a medical treatment.</div>
-    <div>© 2026 KishanBali / KEMP Wisdom Publications — All rights reserved.</div>
-    <div><a href="https://chat.whatsapp.com/BiuWy6NVFboGHGqt4mKBSM" target="_blank" rel="noopener">WhatsApp Community</a></div>
-  </footer>
-</main>
+<div class="card" id="card">
+<canvas id="canvas"></canvas>
+<div class="content">
+<div class="title">
+<div class="brand">KEMP EYE 👁 AI</div>
+<div class="main-title">SOMATIC RHYTHM</div>
+<div class="frequency">138.1 HZ HARMONIC RESONANCE</div>
+</div>
+<div class="guidance">Let your heart beat at its own quiet pace inside your chest. Feel the weight of your body resting right where you are—grounded, steady, and completely held by the ground beneath you.<br><br>Now, bring them together: let your breath move right through that space. In and out. No force, just the natural rise of your chest and the gentle pulse of your heart moving as one single, living motion.</div>
+<div class="audioBox">
+<div class="audioTitle">138.1 Hz Audio</div>
+<div class="audioSub">AI Generated Audio Frequency</div>
+<button class="audioButton" id="audioButton" type="button">▶ PLAY 138.1 Hz</button>
+</div>
+<div class="footnotes">
+<div class="footnote-full">🎧 Headphone listening recommended</div>
+<div>AI Generated 138.1 Hz Audio Frequency — No Attribution Required</div>
+<div>@KishanBali/KEMP Wisdom Publications All rights reserved</div>
+<div class="footnote-full disclaimer">Disclaimer: This experience is for relaxation and personal experiential use only. It is not medical advice or a medical treatment.</div>
+</div>
+</div>
+</div>
 <script>
-let ctx=null,osc=null,gain=null,stopTimer=null;
-const play=document.getElementById('play'),status=document.getElementById('status');
-function stopAudio(){
-  if(stopTimer)clearTimeout(stopTimer);
-  stopTimer=null;
-  if(osc){try{osc.stop()}catch(e){}osc.disconnect();osc=null}
-  if(gain){gain.disconnect();gain=null}
-  play.textContent='▶ Play 138.1 Hz';status.textContent='';
+const card=document.getElementById("card"),canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),audioButton=document.getElementById("audioButton");
+let W=0,H=0,dpr=1,t=0,audioContext=null,oscillator=null,gainNode=null,isPlaying=false;
+function resizeCanvas(){const r=card.getBoundingClientRect();W=r.width;H=r.height;dpr=window.devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+window.addEventListener("resize",resizeCanvas);resizeCanvas();
+function draw(){
+ t+=.015;ctx.clearRect(0,0,W,H);ctx.fillStyle="#f8f6ef";ctx.fillRect(0,0,W,H);
+ const cx=W*.70,cy=H*.53,base=Math.min(W,H)*.18,breath=(Math.sin(t)+1)/2;
+ const g=ctx.createRadialGradient(cx,cy,0,cx,cy,base*2.7);
+ g.addColorStop(0,"rgba(116,156,170,.25)");g.addColorStop(.55,"rgba(160,190,195,.10)");g.addColorStop(1,"rgba(248,246,239,0)");
+ ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,base*2.7,0,Math.PI*2);ctx.fill();
+ for(let ring=0;ring<5;ring++){
+  const radius=base+ring*base*.30+breath*base*.10;ctx.beginPath();
+  for(let a=0;a<=Math.PI*2;a+=.035){const wave=Math.sin(a*8+t*2+ring)*2,r=radius+wave,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r*.72;a===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+  ctx.strokeStyle="rgba(75,115,128,"+(.10+(5-ring)*.025)+")";ctx.lineWidth=1;ctx.stroke();
+ }
+ const pulse=base*(.65+breath*.15),core=ctx.createRadialGradient(cx,cy,0,cx,cy,pulse);
+ core.addColorStop(0,"rgba(180,125,85,.25)");core.addColorStop(.45,"rgba(180,125,85,.08)");core.addColorStop(1,"rgba(180,125,85,0)");
+ ctx.fillStyle=core;ctx.beginPath();ctx.arc(cx,cy,pulse,0,Math.PI*2);ctx.fill();
+ requestAnimationFrame(draw);
 }
-async function startAudio(){
-  if(osc){stopAudio();return}
-  ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
-  if(ctx.state==='suspended')await ctx.resume();
-  osc=ctx.createOscillator();gain=ctx.createGain();
-  osc.type='sine';osc.frequency.value=138.1;gain.gain.value=.045;
-  osc.connect(gain).connect(ctx.destination);osc.start();
-  play.textContent='■ Stop 138.1 Hz';status.textContent='Playing 138.1 Hz';
-  stopTimer=setTimeout(stopAudio,60000);
+draw();
+async function start138Hz(){
+ if(!audioContext)audioContext=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioContext.state==="suspended")await audioContext.resume();
+ if(isPlaying)return;
+ oscillator=audioContext.createOscillator();gainNode=audioContext.createGain();
+ oscillator.type="sine";oscillator.frequency.setValueAtTime(138.1,audioContext.currentTime);
+ gainNode.gain.setValueAtTime(.0001,audioContext.currentTime);
+ gainNode.gain.exponentialRampToValueAtTime(.08,audioContext.currentTime+.8);
+ oscillator.connect(gainNode);gainNode.connect(audioContext.destination);oscillator.start();
+ isPlaying=true;audioButton.classList.add("playing");audioButton.textContent="■ STOP 138.1 Hz";
 }
-play.addEventListener('click',startAudio);
-document.getElementById('share').addEventListener('click',async()=>{
-  const url=location.href;
-  if(navigator.share){try{await navigator.share({title:'KEMP EYE 👁 AI — PALM RECHARGE',text:'138.1 HZ HARMONIC RESONANCE',url})}catch(e){}}
-  else{try{await navigator.clipboard.writeText(url);status.textContent='Live card link copied'}catch(e){status.textContent='Copy the browser link to share the live card'}}});
-document.getElementById('wa').addEventListener('click',()=>{
-  const u='https://chat.whatsapp.com/BiuWy6NVFboGHGqt4mKBSM';
-  window.open(u,'_blank','noopener');
+function stop138Hz(){
+ if(!oscillator||!audioContext){isPlaying=false;return}
+ const now=audioContext.currentTime,old=oscillator;
+ gainNode.gain.cancelScheduledValues(now);gainNode.gain.setValueAtTime(Math.max(gainNode.gain.value,.0001),now);gainNode.gain.exponentialRampToValueAtTime(.0001,now+.15);
+ setTimeout(()=>{try{old.stop();old.disconnect()}catch(e){}},180);
+ oscillator=null;gainNode=null;isPlaying=false;audioButton.classList.remove("playing");audioButton.textContent="▶ PLAY 138.1 Hz";
+}
+audioButton.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();isPlaying?stop138Hz():start138Hz()});
+card.addEventListener("pointerdown",e=>{
+ if(e.target===audioButton)return;
+ const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,el=document.createElement("div");
+ el.className="ripple";el.style.left=x+"px";el.style.top=y+"px";card.appendChild(el);setTimeout(()=>el.remove(),900);
 });
-window.addEventListener('pagehide',stopAudio);
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&isPlaying)stop138Hz()});
 </script>
 </body>
 </html>
