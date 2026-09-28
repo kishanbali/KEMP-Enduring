@@ -2,102 +2,162 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>KEMP EYE — 138.1 Hz Somatic Rhythm</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Somatic Rhythm Canvas</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;min-height:100%;background:#eeeeeb;font-family:Arial,Helvetica,sans-serif}
-body{display:flex;justify-content:center;align-items:flex-start;padding:12px}
-.card{position:relative;width:min(100%,10cm);aspect-ratio:10/6;max-height:90vh;background:#f8f6ef;border:1px solid #c9c4b6;border-radius:10px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.15)}
-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.content{position:absolute;inset:0;z-index:5;pointer-events:none;color:#20252a}
-.title{position:absolute;top:5%;left:4%;right:4%;text-align:center}
-.brand{font-size:clamp(11px,2.5vw,17px);font-weight:700;letter-spacing:.04em}
-.main-title{margin-top:2px;font-size:clamp(12px,3vw,19px);font-weight:700;letter-spacing:.03em}
-.frequency{margin-top:2px;font-size:clamp(9px,2.2vw,14px);font-weight:600;letter-spacing:.08em}
-.guidance{position:absolute;left:5%;right:5%;top:23%;text-align:center;font-size:clamp(7px,1.7vw,11px);line-height:1.35;font-weight:400}
-.audioBox{position:absolute;left:4%;bottom:21%;width:42%;min-width:125px;background:rgba(255,255,255,.88);border:1px solid #c7c0ae;border-radius:8px;padding:5px 7px;pointer-events:auto}
-.audioTitle{font-size:clamp(8px,2vw,12px);font-weight:700}
-.audioSub{font-size:clamp(6px,1.5vw,9px);margin-top:1px}
-.audioButton{margin-top:4px;width:100%;min-height:25px;border:1px solid #8d887c;border-radius:20px;background:#fff;color:#20252a;font-weight:700;font-size:clamp(7px,1.7vw,10px);cursor:pointer;touch-action:manipulation}
-.audioButton.playing{background:#20252a;color:#fff}
-.footnotes{position:absolute;left:3%;right:3%;bottom:3%;padding-top:3px;border-top:1px solid #bdb7a8;display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;font-size:clamp(5px,1.25vw,8px);line-height:1.25;color:#44423d}
-.footnote-full{grid-column:1/-1}
-.disclaimer{color:#55514a}
-.ripple{position:absolute;width:8px;height:8px;border:1px solid rgba(70,110,125,.55);border-radius:50%;pointer-events:none;z-index:10;animation:ripple .9s ease-out forwards}
-@keyframes ripple{from{transform:translate(-50%,-50%) scale(1);opacity:.7}to{transform:translate(-50%,-50%) scale(15);opacity:0}}
+*{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:#08090d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#e2e8f0}
+#card{position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;background:#08090d}
+canvas{display:block;width:100%;height:100%;cursor:pointer}
+#ui-overlay{position:absolute;bottom:18%;left:50%;transform:translateX(-50%);width:90%;max-width:600px;text-align:center;pointer-events:none;transition:opacity 1.5s ease}
+.caption{font-size:clamp(.75rem,2.7vw,1.125rem);line-height:1.5;font-weight:300;letter-spacing:.02em;color:rgba(226,232,240,.85);text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.start-prompt{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:.95rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);pointer-events:none;transition:opacity 1s ease}
+#frequency-panel{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);width:min(88%,430px);text-align:center;pointer-events:auto}
+#freq-button{border:1px solid rgba(226,232,240,.45);border-radius:22px;padding:7px 18px;background:rgba(8,9,13,.72);color:#e2e8f0;font-size:clamp(.65rem,2.2vw,.9rem);cursor:pointer;touch-action:manipulation}
+#freq-button.playing{background:rgba(226,232,240,.92);color:#08090d}
+.freq-note{margin-top:5px;font-size:clamp(.52rem,1.7vw,.72rem);color:rgba(226,232,240,.72)}
+#footnotes{position:absolute;left:4%;right:4%;bottom:1%;text-align:center;font-size:clamp(.43rem,1.35vw,.62rem);line-height:1.25;color:rgba(226,232,240,.58);pointer-events:none}
 </style>
 </head>
 <body>
-<div class="card" id="card">
+<div id="card">
 <canvas id="canvas"></canvas>
-<div class="content">
-<div class="title">
-<div class="brand">KEMP EYE 👁 AI</div>
-<div class="main-title">SOMATIC RHYTHM</div>
-<div class="frequency">138.1 HZ HARMONIC RESONANCE</div>
+<div id="start-prompt" class="start-prompt">Tap Screen to Begin</div>
+<div id="ui-overlay" style="opacity:0;"><p id="caption" class="caption"></p></div>
+<div id="frequency-panel">
+<button id="freq-button" type="button">▶ PLAY 138.1 Hz</button>
+<div class="freq-note">AI Generated 138.1 Hz Audio Frequency — No Attribution Required</div>
+<div class="freq-note">🎧 Headphone listening recommended</div>
 </div>
-<div class="guidance">Let your heart beat at its own quiet pace inside your chest. Feel the weight of your body resting right where you are—grounded, steady, and completely held by the ground beneath you.<br><br>Now, bring them together: let your breath move right through that space. In and out. No force, just the natural rise of your chest and the gentle pulse of your heart moving as one single, living motion.</div>
-<div class="audioBox">
-<div class="audioTitle">138.1 Hz Audio</div>
-<div class="audioSub">AI Generated Audio Frequency</div>
-<button class="audioButton" id="audioButton" type="button">▶ PLAY 138.1 Hz</button>
-</div>
-<div class="footnotes">
-<div class="footnote-full">🎧 Headphone listening recommended</div>
-<div>AI Generated 138.1 Hz Audio Frequency — No Attribution Required</div>
-<div>@KishanBali/KEMP Wisdom Publications All rights reserved</div>
-<div class="footnote-full disclaimer">Disclaimer: This experience is for relaxation and personal experiential use only. It is not medical advice or a medical treatment.</div>
+<div id="footnotes">
+@KishanBali/KEMP Wisdom Publications All rights reserved<br>
+Disclaimer: This experience is for relaxation and personal experiential use only. It is not medical advice or a medical treatment.
 </div>
 </div>
-</div>
+
 <script>
-const card=document.getElementById("card"),canvas=document.getElementById("canvas"),ctx=canvas.getContext("2d"),audioButton=document.getElementById("audioButton");
-let W=0,H=0,dpr=1,t=0,audioContext=null,oscillator=null,gainNode=null,isPlaying=false;
-function resizeCanvas(){const r=card.getBoundingClientRect();W=r.width;H=r.height;dpr=window.devicePixelRatio||1;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
-window.addEventListener("resize",resizeCanvas);resizeCanvas();
-function draw(){
- t+=.015;ctx.clearRect(0,0,W,H);ctx.fillStyle="#f8f6ef";ctx.fillRect(0,0,W,H);
- const cx=W*.70,cy=H*.53,base=Math.min(W,H)*.18,breath=(Math.sin(t)+1)/2;
- const g=ctx.createRadialGradient(cx,cy,0,cx,cy,base*2.7);
- g.addColorStop(0,"rgba(116,156,170,.25)");g.addColorStop(.55,"rgba(160,190,195,.10)");g.addColorStop(1,"rgba(248,246,239,0)");
- ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,base*2.7,0,Math.PI*2);ctx.fill();
- for(let ring=0;ring<5;ring++){
-  const radius=base+ring*base*.30+breath*base*.10;ctx.beginPath();
-  for(let a=0;a<=Math.PI*2;a+=.035){const wave=Math.sin(a*8+t*2+ring)*2,r=radius+wave,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r*.72;a===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
-  ctx.strokeStyle="rgba(75,115,128,"+(.10+(5-ring)*.025)+")";ctx.lineWidth=1;ctx.stroke();
- }
- const pulse=base*(.65+breath*.15),core=ctx.createRadialGradient(cx,cy,0,cx,cy,pulse);
- core.addColorStop(0,"rgba(180,125,85,.25)");core.addColorStop(.45,"rgba(180,125,85,.08)");core.addColorStop(1,"rgba(180,125,85,0)");
- ctx.fillStyle=core;ctx.beginPath();ctx.arc(cx,cy,pulse,0,Math.PI*2);ctx.fill();
- requestAnimationFrame(draw);
+const scriptData=[
+{start:0,text:"Let your heart beat at its own quiet pace inside your chest. Feel the weight of your body resting right where you are—grounded, steady, and completely held by the ground beneath you."},
+{start:15,text:"Now, bring them together: let your breath move right through that space."},
+{start:25,text:"In and out. No force, just the natural rise of your chest and the gentle pulse of your heart moving as one single, living motion."},
+{start:40,text:"The screen beneath your fingers is just a quiet window. One gentle tap, and the rhythm meets you right where you live—steadying the body, easing the heart, and letting the breath flow naturally."}
+];
+
+class CanvasRenderer{
+constructor(canvas){
+this.canvas=canvas;this.ctx=canvas.getContext('2d');this.width=window.innerWidth;this.height=window.innerHeight;this.dpr=window.devicePixelRatio||1;
+this.ripples=[];this.time=0;this.breathPhase=0;this.heartbeatPulse=0;this.resize();window.addEventListener('resize',()=>this.resize());
 }
-draw();
-async function start138Hz(){
- if(!audioContext)audioContext=new(window.AudioContext||window.webkitAudioContext)();
- if(audioContext.state==="suspended")await audioContext.resume();
- if(isPlaying)return;
- oscillator=audioContext.createOscillator();gainNode=audioContext.createGain();
- oscillator.type="sine";oscillator.frequency.setValueAtTime(138.1,audioContext.currentTime);
- gainNode.gain.setValueAtTime(.0001,audioContext.currentTime);
- gainNode.gain.exponentialRampToValueAtTime(.08,audioContext.currentTime+.8);
- oscillator.connect(gainNode);gainNode.connect(audioContext.destination);oscillator.start();
- isPlaying=true;audioButton.classList.add("playing");audioButton.textContent="■ STOP 138.1 Hz";
+resize(){
+this.width=window.innerWidth;this.height=window.innerHeight;this.dpr=window.devicePixelRatio||1;
+this.canvas.width=this.width*this.dpr;this.canvas.height=this.height*this.dpr;
+this.ctx.setTransform(this.dpr,0,0,this.dpr,0,0);
 }
-function stop138Hz(){
- if(!oscillator||!audioContext){isPlaying=false;return}
- const now=audioContext.currentTime,old=oscillator;
- gainNode.gain.cancelScheduledValues(now);gainNode.gain.setValueAtTime(Math.max(gainNode.gain.value,.0001),now);gainNode.gain.exponentialRampToValueAtTime(.0001,now+.15);
- setTimeout(()=>{try{old.stop();old.disconnect()}catch(e){}},180);
- oscillator=null;gainNode=null;isPlaying=false;audioButton.classList.remove("playing");audioButton.textContent="▶ PLAY 138.1 Hz";
+addRipple(x,y){this.ripples.push({x,y,radius:10,maxRadius:Math.max(this.width,this.height)*.4,alpha:.6})}
+triggerHeartbeat(){this.heartbeatPulse=1}
+render(dt){
+this.time+=dt;this.breathPhase=(Math.sin(this.time*(Math.PI*2/6))+1)/2;
+this.heartbeatPulse=Math.max(0,this.heartbeatPulse-dt*3.5);
+const cx=this.width/2,cy=this.height/2,baseRadius=Math.min(cx,cy)*.28;
+this.ctx.fillStyle='#08090d';this.ctx.fillRect(0,0,this.width,this.height);
+const auraRadius=baseRadius*(1.2+this.breathPhase*.6);
+const auraGlow=this.ctx.createRadialGradient(cx,cy,0,cx,cy,auraRadius);
+auraGlow.addColorStop(0,`rgba(45,85,125,${.15+this.breathPhase*.1})`);
+auraGlow.addColorStop(.6,`rgba(20,35,55,${.08+this.breathPhase*.05})`);
+auraGlow.addColorStop(1,'rgba(8,9,13,0)');
+this.ctx.fillStyle=auraGlow;this.ctx.beginPath();this.ctx.arc(cx,cy,auraRadius,0,Math.PI*2);this.ctx.fill();
+const heartRadius=baseRadius*(.85+this.heartbeatPulse*.12);
+const heartGlow=this.ctx.createRadialGradient(cx,cy,0,cx,cy,heartRadius);
+heartGlow.addColorStop(0,`rgba(215,110,100,${.25+this.heartbeatPulse*.4})`);
+heartGlow.addColorStop(1,'rgba(215,110,100,0)');
+this.ctx.fillStyle=heartGlow;this.ctx.beginPath();this.ctx.arc(cx,cy,heartRadius,0,Math.PI*2);this.ctx.fill();
+const ringRadius=baseRadius+this.breathPhase*45;
+this.ctx.strokeStyle=`rgba(160,210,235,${.2+this.breathPhase*.35})`;
+this.ctx.lineWidth=1.5+this.breathPhase*1.5;this.ctx.beginPath();this.ctx.arc(cx,cy,ringRadius,0,Math.PI*2);this.ctx.stroke();
+for(let i=this.ripples.length-1;i>=0;i--){
+const r=this.ripples[i];r.radius+=dt*180;r.alpha-=dt*.4;
+if(r.alpha<=0){this.ripples.splice(i,1);continue}
+this.ctx.strokeStyle=`rgba(220,235,255,${r.alpha})`;this.ctx.lineWidth=1;this.ctx.beginPath();this.ctx.arc(r.x,r.y,r.radius,0,Math.PI*2);this.ctx.stroke();
 }
-audioButton.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();isPlaying?stop138Hz():start138Hz()});
-card.addEventListener("pointerdown",e=>{
- if(e.target===audioButton)return;
- const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,el=document.createElement("div");
- el.className="ripple";el.style.left=x+"px";el.style.top=y+"px";card.appendChild(el);setTimeout(()=>el.remove(),900);
+}
+}
+
+class AudioEngine{
+constructor(){this.ctx=null;this.isInitialized=false}
+init(){if(this.isInitialized)return;this.ctx=new(window.AudioContext||window.webkitAudioContext)();this.isInitialized=true}
+playHeartbeat(time){
+if(!this.ctx)return;
+const osc=this.ctx.createOscillator(),gain=this.ctx.createGain();
+osc.type='sine';osc.frequency.setValueAtTime(65,time);osc.frequency.exponentialRampToValueAtTime(30,time+.12);
+gain.gain.setValueAtTime(.4,time);gain.gain.exponentialRampToValueAtTime(.001,time+.18);
+osc.connect(gain);gain.connect(this.ctx.destination);osc.start(time);osc.stop(time+.2);
+}
+playChime(){
+if(!this.ctx)return;const now=this.ctx.currentTime;[329.63,493.88,659.25].forEach(f=>{
+const osc=this.ctx.createOscillator(),gain=this.ctx.createGain();osc.type='sine';osc.frequency.setValueAtTime(f,now);
+gain.gain.setValueAtTime(.05,now);gain.gain.exponentialRampToValueAtTime(.0001,now+1.8);
+osc.connect(gain);gain.connect(this.ctx.destination);osc.start(now);osc.stop(now+2);
 });
-document.addEventListener("visibilitychange",()=>{if(document.hidden&&isPlaying)stop138Hz()});
+}
+}
+
+const canvas=document.getElementById('canvas'),promptEl=document.getElementById('start-prompt'),overlayEl=document.getElementById('ui-overlay'),captionEl=document.getElementById('caption'),freqButton=document.getElementById('freq-button');
+const renderer=new CanvasRenderer(canvas),audio=new AudioEngine();
+let isActive=false,startTime=0,lastFrameTime=performance.now(),nextBeatTimer=0;
+let freqOsc=null,freqGain=null,isFreqPlaying=false;
+
+function updateCaptions(elapsed){
+let currentText="";
+for(let i=scriptData.length-1;i>=0;i--){if(elapsed>=scriptData[i].start){currentText=scriptData[i].text;break}}
+if(captionEl.innerText!==currentText)captionEl.innerText=currentText;
+}
+
+function loop(now){
+const dt=Math.min((now-lastFrameTime)/1000,.1);lastFrameTime=now;
+if(isActive){
+const elapsed=(now-startTime)/1000;nextBeatTimer+=dt;
+if(nextBeatTimer>=1){nextBeatTimer-=1;renderer.triggerHeartbeat();if(audio.ctx)audio.playHeartbeat(audio.ctx.currentTime)}
+updateCaptions(elapsed);
+}
+renderer.render(dt);requestAnimationFrame(loop);
+}
+
+function handlePointer(e){
+if(e.target===freqButton)return;
+const x=e.clientX||(e.touches&&e.touches[0].clientX),y=e.clientY||(e.touches&&e.touches[0].clientY);
+renderer.addRipple(x,y);
+if(!isActive){
+isActive=true;startTime=performance.now();audio.init();if(audio.ctx&&audio.ctx.state==='suspended')audio.ctx.resume();
+promptEl.style.opacity='0';overlayEl.style.opacity='1';
+}else{
+audio.playChime();if(navigator.vibrate)navigator.vibrate(15);
+}
+}
+
+async function startFrequency(){
+if(!audio.ctx)audio.init();
+if(audio.ctx&&audio.ctx.state==='suspended')await audio.ctx.resume();
+if(isFreqPlaying)return;
+freqOsc=audio.ctx.createOscillator();freqGain=audio.ctx.createGain();
+freqOsc.type='sine';freqOsc.frequency.setValueAtTime(138.1,audio.ctx.currentTime);
+freqGain.gain.setValueAtTime(.0001,audio.ctx.currentTime);
+freqGain.gain.exponentialRampToValueAtTime(.08,audio.ctx.currentTime+.8);
+freqOsc.connect(freqGain);freqGain.connect(audio.ctx.destination);freqOsc.start();
+isFreqPlaying=true;freqButton.classList.add('playing');freqButton.textContent='■ STOP 138.1 Hz';
+}
+
+function stopFrequency(){
+if(!freqOsc||!audio.ctx){isFreqPlaying=false;freqButton.classList.remove('playing');freqButton.textContent='▶ PLAY 138.1 Hz';return}
+const oldOsc=freqOsc,now=audio.ctx.currentTime;
+freqGain.gain.cancelScheduledValues(now);freqGain.gain.setValueAtTime(Math.max(freqGain.gain.value,.0001),now);freqGain.gain.exponentialRampToValueAtTime(.0001,now+.15);
+setTimeout(()=>{try{oldOsc.stop();oldOsc.disconnect()}catch(e){}},180);
+freqOsc=null;freqGain=null;isFreqPlaying=false;freqButton.classList.remove('playing');freqButton.textContent='▶ PLAY 138.1 Hz';
+}
+
+freqButton.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();isFreqPlaying?stopFrequency():startFrequency()});
+canvas.addEventListener('pointerdown',handlePointer);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&isFreqPlaying)stopFrequency()});
+requestAnimationFrame(loop);
 </script>
 </body>
 </html>
